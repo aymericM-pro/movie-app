@@ -21,6 +21,7 @@
         <lombok.version>1.18.32</lombok.version>
         <springdoc.version>2.2.0</springdoc.version>
         <hoverfly-java.version>0.18.1</hoverfly-java.version>
+        <springdoc.version>2.8.3</springdoc.version>
     </properties>
 
     <dependencies>
@@ -35,11 +36,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
@@ -49,11 +45,22 @@
             <artifactId>okhttp</artifactId>
             <version>${okhttp.version}</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>io.specto</groupId>
             <artifactId>hoverfly-java</artifactId>
             <scope>test</scope>
             <version>${hoverfly-java.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.specto</groupId>
+            <artifactId>hoverfly-java-junit5</artifactId>
+            <version>${hoverfly-java.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

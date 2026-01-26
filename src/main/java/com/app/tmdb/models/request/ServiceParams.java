@@ -1,4 +1,4 @@
-package com.app.tmdb.requests;
+package com.app.tmdb.models.request;
 
 public abstract class ServiceParams {
 

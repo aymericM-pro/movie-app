@@ -2,7 +2,7 @@ package com.app.tmdb.usecase;
 
 import com.app.tmdb.client.TmdbClient;
 import com.app.tmdb.models.responses.MovieListsResponse;
-import com.app.tmdb.requests.MovieListsRequest;
+import com.app.tmdb.models.request.MovieListsRequest;
 import org.springframework.stereotype.Component;
 
 @Component

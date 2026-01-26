@@ -1,4 +1,4 @@
-package com.app.tmdb.requests;
+package com.app.tmdb.models.request;
 
 import lombok.Getter;
 import lombok.Setter;

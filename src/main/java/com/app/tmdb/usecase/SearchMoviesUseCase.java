@@ -2,7 +2,7 @@ package com.app.tmdb.usecase;
 
 import com.app.tmdb.client.TmdbClient;
 import com.app.tmdb.models.responses.MovieSearchResponse;
-import com.app.tmdb.requests.MovieSearchRequest;
+import com.app.tmdb.models.request.MovieSearchRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +17,6 @@ public class SearchMoviesUseCase
 
     @Override
     protected MovieSearchResponse doExecute(MovieSearchRequest params) {
-        return client.searchMovies(params);
+        return client.getMovieSearch(params);
     }
 }

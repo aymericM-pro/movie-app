@@ -1,6 +1,6 @@
 package com.app.tmdb.usecase;
 
-import com.app.tmdb.requests.ServiceParams;
+import com.app.tmdb.models.request.ServiceParams;
 
 public abstract class UseCase<P extends ServiceParams, R> {
 

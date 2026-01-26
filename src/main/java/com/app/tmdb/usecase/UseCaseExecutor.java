@@ -1,6 +1,6 @@
 package com.app.tmdb.usecase;
 
-import com.app.tmdb.requests.ServiceParams;
+import com.app.tmdb.models.request.ServiceParams;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
