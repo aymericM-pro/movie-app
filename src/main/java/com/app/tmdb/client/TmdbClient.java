@@ -5,11 +5,13 @@ import com.app.tmdb.errors.TmdbError;
 import com.app.tmdb.models.request.*;
 import com.app.tmdb.models.responses.*;
 import com.app.tmdb.modules.genders.responses.Gender;
-import com.app.tmdb.modules.genders.responses.GenderResponse;
 import com.app.tmdb.modules.genders.responses.GenreListResponse;
+import com.app.tmdb.modules.shows.TmdbTvRequestMapper;
 import com.app.tmdb.modules.movies.requests.TopRatedMoviesRequest;
 import com.app.tmdb.modules.collections.responses.CollectionSearchResponse;
 import com.app.tmdb.modules.search.requests.DiscoverMoviesRequest;
+import com.app.tmdb.modules.shows.requests.TvDetailsRequest;
+import com.app.tmdb.modules.shows.responses.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
@@ -58,10 +60,6 @@ public class TmdbClient extends AbstractOkHttpClient {
         return get(TmdbRequestMapper.trending(request), Headers.of(), MovieSearchResponse.class);
     }
 
-    public MovieSearchResponse getTvCollection(TvCollectionRequest request) {
-        return get(TmdbRequestMapper.tvCollection(request), Headers.of(), MovieSearchResponse.class);
-    }
-
     public CollectionResponse getCollectionById(Long collectionId, String language) {
         return get(TmdbRequestMapper.collectionById(collectionId, language), Headers.of(), CollectionResponse.class
         );
@@ -85,6 +83,32 @@ public class TmdbClient extends AbstractOkHttpClient {
 
     public MovieSearchResponse getSimilarMovies(MovieDetailsRequest r) {
         return get(TmdbRequestMapper.similarMovies(r), Headers.of(), MovieSearchResponse.class);
+    }
+
+    public TvSearchResponse getTvCollection(TvCollectionRequest request) {
+        return get(TmdbTvRequestMapper.tvCollection(request), Headers.of(), TvSearchResponse.class);
+    }
+
+    // TMDB RAW DETAILS
+    public TvMainDetails getTvDetails(TvDetailsRequest request) {
+        return get(TmdbTvRequestMapper.tvDetails(request), Headers.of(), TvMainDetails.class);
+    }
+
+    public TvCreditsResponse getTvCredits(TvDetailsRequest request) {
+        return get(TmdbTvRequestMapper.tvCredits(request), Headers.of(), TvCreditsResponse.class);
+    }
+
+    public TvVideosResponse getTvVideos(TvDetailsRequest request) {
+        return get(TmdbTvRequestMapper.tvVideos(request), Headers.of(), TvVideosResponse.class);
+    }
+
+
+    public TvSearchResponse getSimilarTv(TvDetailsRequest r) {
+        return get(TmdbTvRequestMapper.similarTv(r), Headers.of(), TvSearchResponse.class);
+    }
+
+    public TvImagesResponse getTvImages(TvDetailsRequest r) {
+        return get(TmdbTvRequestMapper.tvImages(r), Headers.of(), TvImagesResponse.class);
     }
 
 

@@ -1,4 +1,4 @@
-package com.app.tmdb.usecase;
+package com.app.tmdb.modules.collections.usecases;
 
 import com.app.tmdb.client.TmdbClient;
 import com.app.tmdb.models.request.CollectionByIdRequest;
@@ -6,7 +6,7 @@ import com.app.tmdb.models.request.MovieDetailsRequest;
 import com.app.tmdb.models.responses.CollectionResponse;
 import com.app.tmdb.models.responses.MovieDetailsResponse;
 import com.app.tmdb.models.responses.collections.CollectionDetailsResponse;
-import com.app.tmdb.usecase.collections.CollectionAggregator;
+import com.app.tmdb.usecase.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

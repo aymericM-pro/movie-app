@@ -208,27 +208,6 @@ public interface TmdbMovieApi {
     );
 
     @Operation(
-            summary = "Séries récentes / à venir",
-            description = """
-                Retourne des collections de séries TV :
-                - RECENT : actuellement diffusées
-                - AIRING_TODAY : diffusées aujourd’hui
-                - POPULAR : séries populaires
-                """,
-            parameters = {
-                    @Parameter(name = "type", required = true),
-                    @Parameter(name = "language"),
-                    @Parameter(name = "page")
-            },
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Succès"),
-                    @ApiResponse(responseCode = "400", description = "Type invalide")
-            }
-    )
-    @GetMapping("/tv/{type}")
-    ResponseEntity<ApiResult<MovieSearchResponse>> getTvCollection(@PathVariable TvCollectionType type, @RequestParam(defaultValue = "fr-FR") String language, @RequestParam(defaultValue = "1") Integer page);
-
-    @Operation(
             summary = "Détails complets d’une collection",
             description = """
             Retourne une collection TMDB enrichie :

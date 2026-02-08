@@ -1,4 +1,4 @@
-package com.app.tmdb.usecase.collections;
+package com.app.tmdb.modules.collections.usecases;
 
 import com.app.tmdb.models.enums.MovieGenre;
 import com.app.tmdb.models.responses.CollectionResponse;

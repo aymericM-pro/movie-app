@@ -6,8 +6,11 @@ import com.app.tmdb.models.enums.*;
 import com.app.tmdb.models.request.*;
 import com.app.tmdb.models.responses.*;
 import com.app.tmdb.models.responses.collections.CollectionDetailsResponse;
+import com.app.tmdb.modules.collections.usecases.GetCollectionDetailsUseCase;
 import com.app.tmdb.modules.movies.requests.TopRatedMoviesRequest;
-import com.app.tmdb.modules.movies.usecases.GetTopRatedMoviesUseCase;
+import com.app.tmdb.modules.movies.usecases.*;
+import com.app.tmdb.modules.search.SearchMoviesUseCase;
+import com.app.tmdb.modules.shows.usecases.GetTvCollectionUseCase;
 import com.app.tmdb.usecase.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -113,7 +116,7 @@ public class TmdbMovieController implements TmdbMovieApi {
         );
     }
 
-    @Override
+/*    @Override
     public ResponseEntity<ApiResult<MovieSearchResponse>> getTvCollection(
             @PathVariable TvCollectionType type,
             @RequestParam(defaultValue = "fr-FR") String language,
@@ -130,7 +133,7 @@ public class TmdbMovieController implements TmdbMovieApi {
                         200
                 )
         );
-    }
+    }*/
 
     @Override
     public ResponseEntity<ApiResult<CollectionDetailsResponse>> getCollectionDetails(

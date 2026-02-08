@@ -1,4 +1,4 @@
-package com.app.tmdb.usecase;
+package com.app.tmdb.modules.movies.usecases;
 
 import com.app.tmdb.client.TmdbClient;
 import com.app.tmdb.models.request.MovieCreditsRequest;
@@ -8,6 +8,7 @@ import com.app.tmdb.models.responses.MovieDetailsResponse;
 import com.app.tmdb.models.responses.MovieFullResponse;
 import com.app.tmdb.models.responses.MovieSearchResponse;
 import com.app.tmdb.models.responses.MovieVideosTmdbResponse;
+import com.app.tmdb.usecase.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

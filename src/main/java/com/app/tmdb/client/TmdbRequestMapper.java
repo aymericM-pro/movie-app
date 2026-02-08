@@ -104,22 +104,6 @@ public final class TmdbRequestMapper {
                 .build();
     }
 
-    public static HttpUrl tvCollection(TvCollectionRequest r) {
-
-        String path = switch (r.getType()) {
-            case RECENT -> "on_the_air";
-            case AIRING_TODAY -> "airing_today";
-            case POPULAR -> "popular";
-        };
-
-        return HttpUrl.parse(BASE_URL).newBuilder()
-                .addPathSegment("tv")
-                .addPathSegment(path)
-                .addQueryParameter("language", r.getLanguage())
-                .addQueryParameter("page", String.valueOf(r.getPage()))
-                .build();
-    }
-
     public static HttpUrl collectionById(Long collectionId, String language) {
         return HttpUrl.parse(BASE_URL).newBuilder()
                 .addPathSegment("collection")
