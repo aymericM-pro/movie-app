@@ -13,6 +13,7 @@ public class MovieVideosTmdbResponse {
     private List<Video> results;
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Video {
         private String id;
         private String key;

@@ -2,8 +2,12 @@ package com.app.tmdb.usecase;
 
 import com.app.tmdb.client.TmdbClient;
 import com.app.tmdb.models.request.MovieCreditsRequest;
-import com.app.tmdb.models.responses.MovieFullResponse;
 import com.app.tmdb.models.request.MovieDetailsRequest;
+import com.app.tmdb.models.responses.MovieCreditsTmdbResponse;
+import com.app.tmdb.models.responses.MovieDetailsResponse;
+import com.app.tmdb.models.responses.MovieFullResponse;
+import com.app.tmdb.models.responses.MovieSearchResponse;
+import com.app.tmdb.models.responses.MovieVideosTmdbResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +23,10 @@ public class GetMovieFullUseCase
     @Override
     protected MovieFullResponse doExecute(MovieDetailsRequest request) {
 
-        CompletableFuture<?> detailsFuture =
+        CompletableFuture<MovieDetailsResponse> detailsFuture =
                 CompletableFuture.supplyAsync(() -> client.getMovieDetails(request));
 
-        CompletableFuture<?> creditsFuture =
+        CompletableFuture<MovieCreditsTmdbResponse> creditsFuture =
                 CompletableFuture.supplyAsync(() -> {
                     MovieCreditsRequest r = new MovieCreditsRequest();
                     r.setMovieId(request.getMovieId());
@@ -30,15 +34,19 @@ public class GetMovieFullUseCase
                     return client.getMovieCredits(r);
                 });
 
-        CompletableFuture<?> videosFuture =
+        CompletableFuture<MovieVideosTmdbResponse> videosFuture =
                 CompletableFuture.supplyAsync(() -> client.getMovieVideos(request));
 
-        CompletableFuture.allOf(detailsFuture, creditsFuture, videosFuture).join();
+        CompletableFuture<MovieSearchResponse> similarFuture =
+                CompletableFuture.supplyAsync(() -> client.getSimilarMovies(request));
+
+        CompletableFuture.allOf(detailsFuture, creditsFuture, videosFuture, similarFuture).join();
 
         MovieFullResponse response = new MovieFullResponse();
-        response.setDetails((com.app.tmdb.models.responses.MovieDetailsResponse) detailsFuture.join());
-        response.setCredits((com.app.tmdb.models.responses.MovieCreditsTmdbResponse) creditsFuture.join());
-        response.setVideos((com.app.tmdb.models.responses.MovieVideosTmdbResponse) videosFuture.join());
+        response.setDetails(detailsFuture.join());
+        response.setCredits(creditsFuture.join());
+        response.setVideos(videosFuture.join());
+        response.setSimilar(similarFuture.join());
 
         return response;
     }

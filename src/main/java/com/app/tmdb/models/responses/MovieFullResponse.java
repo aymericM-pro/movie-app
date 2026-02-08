@@ -10,4 +10,5 @@ public class MovieFullResponse {
     private MovieDetailsResponse details;
     private MovieCreditsTmdbResponse credits;
     private MovieVideosTmdbResponse videos;
+    private MovieSearchResponse similar;
 }

@@ -4,6 +4,7 @@ import com.app.tmdb.ApiResult;
 import com.app.tmdb.models.enums.*;
 import com.app.tmdb.models.request.*;
 import com.app.tmdb.models.responses.*;
+import com.app.tmdb.models.responses.collections.CollectionDetailsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -125,24 +126,39 @@ public interface TmdbMovieApi {
     );
 
     @Operation(
-            summary = "Films par plateforme",
-            description = "Films disponibles sur une plateforme de streaming via Discover TMDB.",
+            summary = "Films par source de catalogue",
+            description = """
+            Retourne des films TMDB filtrés par source :
+            - PROVIDER : plateforme de streaming (Netflix, Prime, Disney+…)
+            - STUDIO : studio de production (Marvel, Warner, DC…)
+            """,
             parameters = {
-                    @Parameter(name = "platform", description = "Plateforme (NETFLIX, DISNEY_PLUS…)", required = true),
+                    @Parameter(
+                            name = "type",
+                            description = "Type de source (PROVIDER ou STUDIO)",
+                            required = true
+                    ),
+                    @Parameter(
+                            name = "sourceId",
+                            description = "ID TMDB de la source (providerId ou companyId)",
+                            required = true
+                    ),
                     @Parameter(name = "region", description = "Région (FR, US…)"),
                     @Parameter(name = "language", description = "Langue"),
                     @Parameter(name = "page", description = "Numéro de page")
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Succès"),
-                    @ApiResponse(responseCode = "400", description = "Plateforme invalide")
+                    @ApiResponse(responseCode = "400", description = "Paramètres invalides"),
+                    @ApiResponse(responseCode = "429", description = "Rate limit TMDB")
             }
     )
-    @GetMapping("/platform/{platform}")
-    ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByPlatform(
-            @PathVariable StreamingPlatform platform,
+    @GetMapping("/catalog")
+    ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByCatalogSource(
+            @RequestParam CatalogSourceType type,
+            @RequestParam Integer sourceId,
             @RequestParam(defaultValue = "FR") String region,
-            @RequestParam(defaultValue = "en-US") String language,
+            @RequestParam(defaultValue = "fr-FR") String language,
             @RequestParam(defaultValue = "1") Integer page
     );
 
@@ -209,15 +225,16 @@ public interface TmdbMovieApi {
             }
     )
     @GetMapping("/tv/{type}")
-    ResponseEntity<ApiResult<MovieSearchResponse>> getTvCollection(
-            @PathVariable TvCollectionType type,
-            @RequestParam(defaultValue = "fr-FR") String language,
-            @RequestParam(defaultValue = "1") Integer page
-    );
+    ResponseEntity<ApiResult<MovieSearchResponse>> getTvCollection(@PathVariable TvCollectionType type, @RequestParam(defaultValue = "fr-FR") String language, @RequestParam(defaultValue = "1") Integer page);
 
     @Operation(
-            summary = "Récupérer une collection par ID",
-            description = "Retourne une collection TMDB connue (Harry Potter, Star Wars, etc.).",
+            summary = "Détails complets d’une collection",
+            description = """
+            Retourne une collection TMDB enrichie :
+            - films détaillés
+            - statistiques globales (budget, revenus, durée…)
+            - méta-données (genres, langues, pays)
+            """,
             parameters = {
                     @Parameter(
                             name = "collectionId",
@@ -236,8 +253,8 @@ public interface TmdbMovieApi {
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = @ExampleObject(
-                                            name = "COLLECTION_RESPONSE",
-                                            externalValue = "classpath:swagger/tmdb-collection-response.json"
+                                            name = "COLLECTION_DETAILS_RESPONSE",
+                                            externalValue = "classpath:swagger/tmdb-collection-details-response.json"
                                     )
                             )
                     ),
@@ -245,10 +262,28 @@ public interface TmdbMovieApi {
                     @ApiResponse(responseCode = "429", description = "Rate limit TMDB")
             }
     )
-    @GetMapping("/collections/{collectionId}")
-    ResponseEntity<ApiResult<CollectionResponse>> getCollectionById(
+    @GetMapping("/collections/{collectionId}/details")
+    ResponseEntity<ApiResult<CollectionDetailsResponse>> getCollectionDetails(
             @PathVariable Long collectionId,
             @RequestParam(defaultValue = "fr-FR") String language
     );
 
+    @Operation(
+        summary = "Films les mieux notés",
+        description = "Retourne une liste des films les mieux notés sur TMDB.",
+        parameters = {
+            @Parameter(name = "language", description = "Langue"),
+            @Parameter(name = "page", description = "Numéro de page")
+        },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Succès"),
+            @ApiResponse(responseCode = "429", description = "Rate limit TMDB")
+
+        }
+    )
+    @GetMapping("/top-rated")
+    ResponseEntity<ApiResult<MovieSearchResponse>> getTopRatedMovies(
+        @RequestParam(defaultValue = "fr-FR") String language,
+        @RequestParam(defaultValue = "1") Integer page
+    );
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieSearchItem {
@@ -22,5 +24,5 @@ public class MovieSearchItem {
     private String releaseDate;
 
     @JsonProperty("vote_average")
-    private Double voteAverage;
+    private BigDecimal voteAverage;
 }

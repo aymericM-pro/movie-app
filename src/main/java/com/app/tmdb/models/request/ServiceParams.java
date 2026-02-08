@@ -13,8 +13,14 @@ public abstract class ServiceParams {
             if (optional) return;
             fail(name + " is required");
         }
-        if (min != null && value < min) fail(name + " must be >= " + min);
-        if (max != null && value > max) fail(name + " must be <= " + max);
+
+        if (min != null && value < min) {
+            fail(name + " must be >= " + min);
+        }
+
+        if (max != null && value > max) {
+            fail(name + " must be <= " + max);
+        }
     }
 
     protected void checkLong(Long value, String name, boolean optional, boolean positiveOnly) {

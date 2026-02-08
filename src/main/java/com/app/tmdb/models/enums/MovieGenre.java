@@ -3,6 +3,9 @@ package com.app.tmdb.models.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 @Getter
 @RequiredArgsConstructor
 public enum MovieGenre {
@@ -28,4 +31,10 @@ public enum MovieGenre {
     WESTERN(37);
 
     private final int id;
+
+    public static Optional<MovieGenre> fromId(Integer id) {
+        return Arrays.stream(values())
+                .filter(g -> g.id == id)
+                .findFirst();
+    }
 }

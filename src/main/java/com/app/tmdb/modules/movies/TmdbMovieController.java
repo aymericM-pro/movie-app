@@ -1,9 +1,13 @@
-package com.app.tmdb;
+package com.app.tmdb.modules.movies;
 
+import com.app.tmdb.ApiResult;
 import com.app.tmdb.client.TmdbMovieApi;
 import com.app.tmdb.models.enums.*;
 import com.app.tmdb.models.request.*;
 import com.app.tmdb.models.responses.*;
+import com.app.tmdb.models.responses.collections.CollectionDetailsResponse;
+import com.app.tmdb.modules.movies.requests.TopRatedMoviesRequest;
+import com.app.tmdb.modules.movies.usecases.GetTopRatedMoviesUseCase;
 import com.app.tmdb.usecase.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,14 +57,22 @@ public class TmdbMovieController implements TmdbMovieApi {
     }
 
     @Override
-    public ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByPlatform(StreamingPlatform platform, String region, String language, Integer page) {
-        MoviesByPlatformRequest request = new MoviesByPlatformRequest();
-        request.setPlatform(platform);
+    public ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByCatalogSource(
+            @RequestParam CatalogSourceType type,
+            @RequestParam Integer sourceId,
+            @RequestParam(defaultValue = "FR") String region,
+            @RequestParam(defaultValue = "fr-FR") String language,
+            @RequestParam(defaultValue = "1") Integer page
+    ) {
+        MoviesByCatalogSourceRequest request = new MoviesByCatalogSourceRequest();
+        request.setType(type);
+        request.setSourceId(sourceId);
         request.setRegion(region);
         request.setLanguage(language);
         request.setPage(page);
 
-        MovieSearchResponse result = executor.execute(GetMoviesByPlatformUseCase.class, request);
+        MovieSearchResponse result =
+                executor.execute(GetMoviesByCatalogSourceUseCase.class, request);
 
         return ResponseEntity.ok(ApiResult.from(result, HttpStatus.OK.value()));
     }
@@ -121,7 +133,7 @@ public class TmdbMovieController implements TmdbMovieApi {
     }
 
     @Override
-    public ResponseEntity<ApiResult<CollectionResponse>> getCollectionById(
+    public ResponseEntity<ApiResult<CollectionDetailsResponse>> getCollectionDetails(
             @PathVariable Long collectionId,
             @RequestParam(defaultValue = "fr-FR") String language
     ) {
@@ -129,6 +141,28 @@ public class TmdbMovieController implements TmdbMovieApi {
         request.setCollectionId(collectionId);
         request.setLanguage(language);
 
-        return ResponseEntity.ok(ApiResult.from(executor.execute(GetCollectionByIdUseCase.class, request), 200));
+        return ResponseEntity.ok(
+                ApiResult.from(
+                        executor.execute(GetCollectionDetailsUseCase.class, request),
+                        HttpStatus.OK.value()
+                )
+        );
+    }
+
+
+    @Override
+    public ResponseEntity<ApiResult<MovieSearchResponse>> getTopRatedMovies(
+            @RequestParam(required = false) String language,
+            @RequestParam(defaultValue = "1") Integer page
+    ) {
+        TopRatedMoviesRequest request = new TopRatedMoviesRequest();
+        request.setLanguage(language != null ? language : "fr-FR");
+        request.setPage(page);
+        request.setRegion("FR");
+
+        MovieSearchResponse result =
+                executor.execute(GetTopRatedMoviesUseCase.class, request);
+
+        return ResponseEntity.ok(ApiResult.from(result, HttpStatus.OK.value()));
     }
 }

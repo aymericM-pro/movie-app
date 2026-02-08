@@ -2,6 +2,7 @@ package com.app.tmdb.models.responses;
 
 import com.app.tmdb.models.request.MovieSearchItem;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +13,10 @@ public class MovieSearchResponse {
 
     private int page;
     private List<MovieSearchItem> results;
-    private int totalPages;
-    private int totalResults;
+
+    @JsonProperty("total_pages")
+    private Integer totalPages;
+
+    @JsonProperty("total_results")
+    private Integer totalResults;
 }
