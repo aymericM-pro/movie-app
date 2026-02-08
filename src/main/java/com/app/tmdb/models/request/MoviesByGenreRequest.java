@@ -1,6 +1,5 @@
 package com.app.tmdb.models.request;
 
-import com.app.tmdb.models.enums.MovieGenre;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,14 +7,14 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MoviesByGenreRequest extends ServiceParams {
 
-    private MovieGenre genre;
+    private Integer genreId;
     private String language = "fr-FR";
     private String region = "FR";
     private Integer page = 1;
 
     @Override
     protected void validate() {
-        if (genre == null) {
+        if (genreId == null) {
             throw new IllegalArgumentException("genre is required");
         }
     }

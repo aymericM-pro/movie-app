@@ -82,16 +82,17 @@ public final class TmdbRequestMapper {
 
         return b.build();
     }
+
     public static HttpUrl moviesByGenre(MoviesByGenreRequest r) {
         return HttpUrl.parse(BASE_URL).newBuilder()
                 .addPathSegments("discover/movie")
-                .addQueryParameter("with_genres", String.valueOf(r.getGenre().getId()))
+                .addQueryParameter("with_genres", String.valueOf(r.getGenreId()))
                 .addQueryParameter("language", r.getLanguage())
-                .addQueryParameter("region", r.getRegion())
                 .addQueryParameter("page", String.valueOf(r.getPage()))
                 .addQueryParameter("sort_by", "popularity.desc")
                 .build();
     }
+
 
     public static HttpUrl trending(TrendingRequest r) {
         return HttpUrl.parse(BASE_URL).newBuilder()

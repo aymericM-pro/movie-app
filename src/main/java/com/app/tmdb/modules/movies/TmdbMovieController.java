@@ -79,13 +79,13 @@ public class TmdbMovieController implements TmdbMovieApi {
 
     @Override
     public ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByGenre(
-            @PathVariable MovieGenre genre,
-            @RequestParam(defaultValue = "FR") String region,
-            @RequestParam(defaultValue = "fr-FR") String language,
-            @RequestParam(defaultValue = "1") Integer page
+            Integer genreId,
+            String region,
+            String language,
+            Integer page
     ) {
         MoviesByGenreRequest request = new MoviesByGenreRequest();
-        request.setGenre(genre);
+        request.setGenreId(genreId);
         request.setRegion(region);
         request.setLanguage(language);
         request.setPage(page);

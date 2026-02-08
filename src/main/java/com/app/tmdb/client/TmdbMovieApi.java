@@ -176,13 +176,14 @@ public interface TmdbMovieApi {
                     @ApiResponse(responseCode = "400", description = "Genre invalide")
             }
     )
-    @GetMapping("/genre/{genre}")
+    @GetMapping("/genre/{genreId}")
     ResponseEntity<ApiResult<MovieSearchResponse>> getMoviesByGenre(
-            @PathVariable MovieGenre genre,
+            @PathVariable Integer genreId,
             @RequestParam(defaultValue = "FR") String region,
             @RequestParam(defaultValue = "fr-FR") String language,
             @RequestParam(defaultValue = "1") Integer page
     );
+
 
     @Operation(
             summary = "Tendances TMDB",
