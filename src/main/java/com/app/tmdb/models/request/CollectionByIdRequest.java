@@ -1,11 +1,12 @@
 package com.app.tmdb.models.request;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class CollectionByIdRequest extends ServiceParams {
+@Getter
+@Setter
+public class CollectionByIdRequest extends PagedRequest{
     private Long collectionId;
-    private String language = "fr-FR";
 
     @Override
     protected void validate() {

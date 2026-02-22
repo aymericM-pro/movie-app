@@ -1,16 +1,13 @@
 package com.app.tmdb.models.request;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-public class MoviesByGenreRequest extends ServiceParams {
+@Getter
+@Setter
+public class MoviesByGenreRequest extends PagedRequest {
 
     private Integer genreId;
-    private String language = "fr-FR";
-    private String region = "FR";
-    private Integer page = 1;
 
     @Override
     protected void validate() {

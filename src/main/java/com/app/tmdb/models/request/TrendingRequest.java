@@ -2,15 +2,18 @@ package com.app.tmdb.models.request;
 
 import com.app.tmdb.models.enums.MediaType;
 import com.app.tmdb.models.enums.TimeWindow;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class TrendingRequest extends ServiceParams {
+@Getter
+@Setter
+public class TrendingRequest extends PagedRequest {
     private MediaType mediaType;
     private TimeWindow timeWindow = TimeWindow.DAY;
-    private String language = "fr-FR";
-    private Integer page = 1;
 
     @Override
-    protected void validate() {}
+    protected void validate() {
+        super.validate();
+        if (mediaType == null) fail("mediaType is required");
+    }
 }

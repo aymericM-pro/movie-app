@@ -1,19 +1,15 @@
 package com.app.tmdb.models.request;
 
 import com.app.tmdb.models.enums.CatalogSourceType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class MoviesByCatalogSourceRequest extends ServiceParams {
+@Getter
+@Setter
+public class MoviesByCatalogSourceRequest extends PagedRequest {
 
     private CatalogSourceType type;
     private Integer sourceId;
-
-    private String language = "en-US";
-    private String region = "FR";
-    private Integer page = 1;
 
     @Override
     protected void validate() {

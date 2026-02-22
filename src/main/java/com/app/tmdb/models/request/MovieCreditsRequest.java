@@ -1,12 +1,13 @@
 package com.app.tmdb.models.request;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class MovieCreditsRequest extends ServiceParams {
+@Getter
+@Setter
+public class MovieCreditsRequest extends PagedRequest {
 
     private Long movieId;
-    private String language;
 
     @Override
     protected void validate() {

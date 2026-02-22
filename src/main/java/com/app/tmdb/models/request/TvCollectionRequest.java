@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class TvCollectionRequest extends ServiceParams {
+public class TvCollectionRequest extends PagedRequest {
 
     private TvCollectionType type;
     private String language = "fr-FR";

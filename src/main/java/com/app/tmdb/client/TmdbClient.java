@@ -89,7 +89,6 @@ public class TmdbClient extends AbstractOkHttpClient {
         return get(TmdbTvRequestMapper.tvCollection(request), Headers.of(), TvSearchResponse.class);
     }
 
-    // TMDB RAW DETAILS
     public TvMainDetails getTvDetails(TvDetailsRequest request) {
         return get(TmdbTvRequestMapper.tvDetails(request), Headers.of(), TvMainDetails.class);
     }
