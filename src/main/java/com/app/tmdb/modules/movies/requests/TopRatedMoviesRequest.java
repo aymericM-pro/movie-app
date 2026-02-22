@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class TopRatedMoviesRequest extends PagedRequest {
 
+    public static TopRatedMoviesRequest of(int page, int pageSize) {}
+
     @Override
     protected void validate() {
     }

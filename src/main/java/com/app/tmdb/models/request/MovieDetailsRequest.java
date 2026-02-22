@@ -8,11 +8,13 @@ import lombok.Setter;
 public class MovieDetailsRequest extends PagedRequest {
     private Long movieId;
 
-    public static MovieDetailsRequest of(Long movieId, String language) {
-        MovieDetailsRequest r = new MovieDetailsRequest();
-        r.setMovieId(movieId);
-        r.setLanguage(language);
-        return r;
+    public static MovieDetailsRequest of(Long movieId, String language, String region, Integer page) {
+        MovieDetailsRequest request = new MovieDetailsRequest();
+        request.setMovieId(movieId);
+        request.setLanguage(language);
+        request.setRegion(region);
+        request.setPage(page);
+        return request;
     }
 
     @Override

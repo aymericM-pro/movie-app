@@ -10,7 +10,6 @@ import com.app.tmdb.modules.collections.usecases.GetCollectionDetailsUseCase;
 import com.app.tmdb.modules.movies.requests.TopRatedMoviesRequest;
 import com.app.tmdb.modules.movies.usecases.*;
 import com.app.tmdb.modules.search.SearchMoviesUseCase;
-import com.app.tmdb.modules.shows.usecases.GetTvCollectionUseCase;
 import com.app.tmdb.usecase.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
