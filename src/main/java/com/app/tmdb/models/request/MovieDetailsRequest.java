@@ -5,14 +5,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MovieDetailsRequest extends ServiceParams {
-
+public class MovieDetailsRequest extends PagedRequest {
     private Long movieId;
-    private String language = "en-US";
+
+    public static MovieDetailsRequest of(Long movieId, String language) {
+        MovieDetailsRequest r = new MovieDetailsRequest();
+        r.setMovieId(movieId);
+        r.setLanguage(language);
+        return r;
+    }
 
     @Override
     protected void validate() {
+        super.validate();
         checkLong(movieId, "movieId", false, true);
-        checkString(language, "language", false, 2, 10);
     }
 }
+
