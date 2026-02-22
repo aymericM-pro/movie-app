@@ -1,6 +1,6 @@
 package com.app.tmdb.modules.search.requests;
 
-import com.app.tmdb.models.request.ServiceParams;
+import com.app.tmdb.models.request.PagedRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class DiscoverMoviesRequest extends ServiceParams {
+public class DiscoverMoviesRequest extends PagedRequest {
 
     private List<Integer> genres = new ArrayList<>();
 
@@ -22,10 +22,6 @@ public class DiscoverMoviesRequest extends ServiceParams {
     private Integer runtimeMin;
     private Integer runtimeMax;
     private String sortBy;
-
-    private String language = "fr-FR";
-    private String region = "FR";
-    private Integer page = 1;
 
     @Override
     protected void validate() {
@@ -47,11 +43,7 @@ public class DiscoverMoviesRequest extends ServiceParams {
         }
 
         checkInt(voteCountMin, "voteCountMin", true, 0, null);
-        checkInt(page, "page", true, 1, null);
-
         checkString(sortBy, "sortBy", true, null, null);
-        checkString(language, "language", true, 2, 10);
-        checkString(region, "region", true, 2, 5);
     }
 
 }

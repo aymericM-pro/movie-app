@@ -27,8 +27,7 @@ public class GetMovieFullUseCase
         CompletableFuture<MovieDetailsResponse> detailsFuture =
                 CompletableFuture.supplyAsync(() -> client.getMovieDetails(request));
 
-        CompletableFuture<MovieCreditsTmdbResponse> creditsFuture =
-                CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<MovieCreditsTmdbResponse> creditsFuture = CompletableFuture.supplyAsync(() -> {
                     MovieCreditsRequest r = new MovieCreditsRequest();
                     r.setMovieId(request.getMovieId());
                     r.setLanguage(request.getLanguage());

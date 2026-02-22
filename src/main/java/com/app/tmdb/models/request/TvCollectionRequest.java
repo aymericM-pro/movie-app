@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 public class TvCollectionRequest extends PagedRequest {
 
     private TvCollectionType type;
-    private String language = "fr-FR";
-    private Integer page = 1;
 
     @Override
     protected void validate() {
