@@ -4,6 +4,8 @@ import com.app.tmdb.models.request.ServiceParams;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class SearchCollectionsRequest extends ServiceParams {
@@ -19,7 +21,7 @@ public class SearchCollectionsRequest extends ServiceParams {
     private String language = "fr-FR";
 
     @Override
-    protected void validate() {
+    protected void collectViolations(List<String> v) {
 
     }
 }

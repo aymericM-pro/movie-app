@@ -3,6 +3,8 @@ package com.app.tmdb.models.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MoviesByGenreRequest extends PagedRequest {
@@ -19,9 +21,8 @@ public class MoviesByGenreRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        if (genreId == null) {
-            throw new IllegalArgumentException("genre is required");
-        }
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        checkInt(v, genreId, "genre", false, null, null);
     }
 }

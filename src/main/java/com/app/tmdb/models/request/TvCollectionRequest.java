@@ -4,6 +4,8 @@ import com.app.tmdb.models.enums.TvCollectionType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class TvCollectionRequest extends PagedRequest {
@@ -19,9 +21,10 @@ public class TvCollectionRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
         if (type == null) {
-            throw new IllegalArgumentException("TvCollectionType is required");
+            v.add("TvCollectionType is required");
         }
     }
 }

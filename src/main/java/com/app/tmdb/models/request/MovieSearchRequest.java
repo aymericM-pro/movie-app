@@ -3,6 +3,8 @@ package com.app.tmdb.models.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MovieSearchRequest extends PagedRequest {
@@ -21,8 +23,9 @@ public class MovieSearchRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        checkString(query, "query", false, 1, 200);
-        checkInt(year, "year", true, 1900, 2100);
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        checkString(v, query, "query", false, 1, 200);
+        checkInt(v, year, "year", true, 1900, 2100);
     }
 }

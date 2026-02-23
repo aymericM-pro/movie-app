@@ -4,6 +4,8 @@ import com.app.tmdb.models.enums.CatalogSourceType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MoviesByCatalogSourceRequest extends PagedRequest {
@@ -22,12 +24,13 @@ public class MoviesByCatalogSourceRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
         if (type == null) {
-            throw new IllegalArgumentException("type is required");
+            v.add("type is required");
         }
         if (sourceId == null) {
-            throw new IllegalArgumentException("sourceId is required");
+            v.add("sourceId is required");
         }
     }
 }

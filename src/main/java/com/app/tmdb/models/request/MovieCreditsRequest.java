@@ -17,9 +17,4 @@ public class MovieCreditsRequest extends PagedRequest {
         request.setPage(page);
         return request;
     }
-
-    @Override
-    protected void validate() {
-
-    }
 }

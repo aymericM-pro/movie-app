@@ -5,6 +5,8 @@ import com.app.tmdb.models.enums.TimeWindow;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class TrendingRequest extends PagedRequest {
@@ -21,8 +23,8 @@ public class TrendingRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        super.validate();
-        if (mediaType == null) fail("mediaType is required");
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        if (mediaType == null) v.add("mediaType is required");
     }
 }

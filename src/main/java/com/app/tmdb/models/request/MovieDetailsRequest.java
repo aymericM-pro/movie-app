@@ -3,6 +3,8 @@ package com.app.tmdb.models.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MovieDetailsRequest extends PagedRequest {
@@ -18,9 +20,9 @@ public class MovieDetailsRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        super.validate();
-        checkLong(movieId, "movieId", false, true);
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        checkLong(v, movieId, "movieId", false, true);
     }
 }
 

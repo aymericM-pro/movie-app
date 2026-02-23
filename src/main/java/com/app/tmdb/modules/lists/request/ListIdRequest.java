@@ -4,6 +4,7 @@ import com.app.tmdb.models.request.ServiceParams;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -15,8 +16,8 @@ public class ListIdRequest extends ServiceParams {
     private Long tmdbMovieId;
 
     @Override
-    protected void validate() {
-        checkString(userEmail, "userEmail", false, null, null);
-        if (listId == null) fail("listId is required");
+    protected void collectViolations(List<String> v) {
+        checkString(v, userEmail, "userEmail", false, null, null);
+        if (listId == null) v.add("listId is required");
     }
 }

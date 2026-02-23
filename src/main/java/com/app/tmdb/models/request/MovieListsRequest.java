@@ -3,12 +3,14 @@ package com.app.tmdb.models.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MovieListsRequest extends PagedRequest {
     private Long movieId;
 
-    public MovieListsRequest of(Long movieId, String language, String region, Integer page) {
+    public static MovieListsRequest of(Long movieId, String language, String region, Integer page) {
         MovieListsRequest request = new MovieListsRequest();
         request.setMovieId(movieId);
         request.setLanguage(language);
@@ -18,7 +20,8 @@ public class MovieListsRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        checkLong(movieId, "movieId", false, true);
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        checkLong(v, movieId, "movieId", false, true);
     }
 }

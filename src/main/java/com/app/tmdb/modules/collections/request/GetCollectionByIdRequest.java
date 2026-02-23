@@ -3,6 +3,8 @@ package com.app.tmdb.modules.collections.request;
 import com.app.tmdb.models.request.ServiceParams;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class GetCollectionByIdRequest extends ServiceParams {
 
@@ -15,9 +17,7 @@ public class GetCollectionByIdRequest extends ServiceParams {
     }
 
     @Override
-    protected void validate() {
-        if (collectionId == null || collectionId <= 0) {
-            throw new IllegalArgumentException("collectionId must be positive");
-        }
+    protected void collectViolations(List<String> v) {
+        checkLong(v, collectionId, "collectionId", false, true);
     }
 }

@@ -22,11 +22,11 @@ public class TmdbTvController implements TmdbTvApi {
     @Override
     public ResponseEntity<ApiResult<TvSearchResponse>> getTvCollection(
             TvCollectionType type, String language, Integer page) {
-        return ResponseEntity.ok(ApiResult.from(
-                executor.execute(GetTvCollectionUseCase.class,
-                        TvCollectionRequest.of(type, language, page)),
-                200
-        ));
+        return ResponseEntity.ok(
+                ApiResult.from(
+                        executor.execute(GetTvCollectionUseCase.class, TvCollectionRequest.of(type, language, page)),
+                        200)
+        );
     }
 
     @Override

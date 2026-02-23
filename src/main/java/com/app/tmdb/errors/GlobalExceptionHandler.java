@@ -18,4 +18,10 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, errorType.getHttpStatus());
     }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(ValidationException ex) {
+        return ResponseEntity.badRequest()
+                .body(new ErrorResponse("VALIDATION_ERROR", String.join("; ", ex.getViolations())));
+    }
 }

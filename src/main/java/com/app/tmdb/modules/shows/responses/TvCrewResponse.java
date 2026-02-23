@@ -12,7 +12,7 @@ public class TvCrewResponse {
     private Long id;
 
     @JsonProperty("credit_id")
-    private String name;
+    private String creditId;
 
     @JsonProperty("department")
     private String department;

@@ -1,10 +1,10 @@
 package com.app.tmdb.modules.shows.requests;
 
 import com.app.tmdb.models.request.PagedRequest;
-import com.app.tmdb.models.request.ServiceParams;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,8 +19,8 @@ public class TvDetailsRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-        super.validate();
-        checkLong(tvId, "tvId", false, true);
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
+        checkLong(v, tvId, "tvId", false, true);
     }
 }

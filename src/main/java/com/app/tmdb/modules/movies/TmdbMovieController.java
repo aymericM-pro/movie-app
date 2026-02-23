@@ -98,7 +98,7 @@ public class TmdbMovieController implements TmdbMovieApi {
             Long collectionId, String language) {
         return ResponseEntity.ok(ApiResult.from(
                 executor.execute(GetCollectionDetailsUseCase.class,
-                        CollectionByIdRequest.of(collectionId, language, null, null)),
+                        CollectionByIdRequest.of(collectionId, language)),
                 HttpStatus.OK.value()
         ));
     }

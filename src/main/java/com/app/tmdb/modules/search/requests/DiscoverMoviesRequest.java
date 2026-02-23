@@ -42,26 +42,22 @@ public class DiscoverMoviesRequest extends PagedRequest {
     }
 
     @Override
-    protected void validate() {
-
-        if (genres == null) {
-            genres = new ArrayList<>();
-        }
+    protected void collectViolations(List<String> v) {
+        super.collectViolations(v);
 
         if (voteAverageMin != null && voteAverageMax != null &&
                 voteAverageMin.compareTo(voteAverageMax) > 0) {
-            fail("voteAverageMin must be <= voteAverageMax");
+            v.add("voteAverageMin must be <= voteAverageMax");
         }
 
-        checkInt(runtimeMin, "runtimeMin", true, 0, null);
-        checkInt(runtimeMax, "runtimeMax", true, 0, null);
+        checkInt(v, runtimeMin, "runtimeMin", true, 0, null);
+        checkInt(v, runtimeMax, "runtimeMax", true, 0, null);
 
         if (runtimeMin != null && runtimeMax != null && runtimeMin > runtimeMax) {
-            fail("runtimeMin must be <= runtimeMax");
+            v.add("runtimeMin must be <= runtimeMax");
         }
 
-        checkInt(voteCountMin, "voteCountMin", true, 0, null);
-        checkString(sortBy, "sortBy", true, null, null);
+        checkInt(v, voteCountMin, "voteCountMin", true, 0, null);
+        checkString(v, sortBy, "sortBy", true, null, null);
     }
-
 }
