@@ -8,7 +8,11 @@ import lombok.Setter;
 @Setter
 public class TopRatedMoviesRequest extends PagedRequest {
 
-    @Override
-    protected void validate() {
+    public static TopRatedMoviesRequest of(String language, String region, Integer page) {
+        TopRatedMoviesRequest r = new TopRatedMoviesRequest();
+        r.setLanguage(language);
+        r.setRegion(region);
+        r.setPage(page);
+        return r;
     }
 }

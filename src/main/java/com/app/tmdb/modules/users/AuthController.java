@@ -1,4 +1,4 @@
-package com.app.tmdb.users;
+package com.app.tmdb.modules.users;
 
 import com.app.tmdb.modules.auth.request.AuthResponse;
 import com.app.tmdb.modules.auth.request.LoginRequest;

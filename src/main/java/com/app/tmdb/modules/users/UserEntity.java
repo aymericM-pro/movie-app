@@ -1,4 +1,4 @@
-package com.app.tmdb.users;
+package com.app.tmdb.modules.users;
 
 import jakarta.persistence.*;
 

@@ -23,6 +23,24 @@ public class DiscoverMoviesRequest extends PagedRequest {
     private Integer runtimeMax;
     private String sortBy;
 
+    public static DiscoverMoviesRequest of(
+            List<Integer> genres, BigDecimal voteAverageMin, BigDecimal voteAverageMax,
+            Integer voteCountMin, Integer runtimeMin, Integer runtimeMax,
+            String sortBy, String language, String region, Integer page) {
+        DiscoverMoviesRequest request = new DiscoverMoviesRequest();
+        request.setGenres(genres != null ? genres : new ArrayList<>());
+        request.setVoteAverageMin(voteAverageMin);
+        request.setVoteAverageMax(voteAverageMax);
+        request.setVoteCountMin(voteCountMin);
+        request.setRuntimeMin(runtimeMin);
+        request.setRuntimeMax(runtimeMax);
+        request.setSortBy(sortBy);
+        request.setLanguage(language);
+        request.setRegion(region);
+        request.setPage(page);
+        return request;
+    }
+
     @Override
     protected void validate() {
 

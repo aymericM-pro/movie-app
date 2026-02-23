@@ -5,7 +5,7 @@ import com.app.tmdb.modules.lists.repository.MovieListRepository;
 import com.app.tmdb.modules.lists.request.CreateListRequest;
 import com.app.tmdb.modules.lists.response.MovieListResponse;
 import com.app.tmdb.usecase.UseCase;
-import com.app.tmdb.users.UserRepository;
+import com.app.tmdb.modules.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.app.tmdb.modules.lists.entity;
 
-import com.app.tmdb.users.UserEntity;
+import com.app.tmdb.modules.users.UserEntity;
 import jakarta.persistence.*;
 
 import java.time.Instant;

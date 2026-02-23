@@ -1,6 +1,5 @@
-package com.app.tmdb.users;
+package com.app.tmdb.modules.users;
 
-import com.app.tmdb.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

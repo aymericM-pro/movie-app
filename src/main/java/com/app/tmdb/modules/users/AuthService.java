@@ -1,4 +1,4 @@
-package com.app.tmdb.users;
+package com.app.tmdb.modules.users;
 
 import com.app.tmdb.modules.auth.request.AuthResponse;
 import com.app.tmdb.modules.auth.request.LoginRequest;
@@ -14,9 +14,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       JwtService jwtService) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;

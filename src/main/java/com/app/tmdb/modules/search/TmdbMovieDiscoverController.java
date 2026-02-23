@@ -31,21 +31,13 @@ public class TmdbMovieDiscoverController {
             @RequestParam(required = false) String sortBy,
             @RequestParam(defaultValue = "fr-FR") String language,
             @RequestParam(defaultValue = "FR") String region,
-            @RequestParam(defaultValue = "1") Integer page
-    ) {
-        DiscoverMoviesRequest request = new DiscoverMoviesRequest();
-        request.setGenres(genres);
-        request.setVoteAverageMin(voteAverageMin);
-        request.setVoteAverageMax(voteAverageMax);
-        request.setVoteCountMin(voteCountMin);
-        request.setRuntimeMin(runtimeMin);
-        request.setRuntimeMax(runtimeMax);
-        request.setSortBy(sortBy);
-        request.setLanguage(language);
-        request.setRegion(region);
-        request.setPage(page);
-
-        MovieSearchResponse result = executor.execute(DiscoverMoviesUseCase.class, request);
-        return ResponseEntity.ok(ApiResult.from(result, HttpStatus.OK.value()));
+            @RequestParam(defaultValue = "1") Integer page) {
+        return ResponseEntity.ok(ApiResult.from(
+                executor.execute(DiscoverMoviesUseCase.class,
+                        DiscoverMoviesRequest.of(genres, voteAverageMin, voteAverageMax,
+                                voteCountMin, runtimeMin, runtimeMax, sortBy, language, region, page)),
+                HttpStatus.OK.value()
+        ));
     }
+
 }

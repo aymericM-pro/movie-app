@@ -25,11 +25,11 @@ public class TmdbGenreController {
 
     @GetMapping
     public ResponseEntity<ApiResult<List<GenderResponse>>> getGenres(
-            @RequestParam(defaultValue = "fr-FR") String language
-    ) {
-        GetGenresRequest request = new GetGenresRequest();
-        request.setLanguage(language);
-
-        return ResponseEntity.ok(ApiResult.from(executor.execute(GetGenresUseCase.class, request), HttpStatus.OK.value()));
+            @RequestParam(defaultValue = "fr-FR") String language) {
+        return ResponseEntity.ok(ApiResult.from(
+                executor.execute(GetGenresUseCase.class, GetGenresRequest.of(language)),
+                HttpStatus.OK.value()
+        ));
     }
+
 }

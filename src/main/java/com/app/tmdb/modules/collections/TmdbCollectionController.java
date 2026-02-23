@@ -27,12 +27,9 @@ public class TmdbCollectionController {
     public ResponseEntity<ApiResult<List<PopularCollectionResponse>>> getPopularCollections(
             @RequestParam(defaultValue = "fr-FR") String language
     ) {
-        GetPopularCollectionsRequest request = new GetPopularCollectionsRequest();
-        request.setLanguage(language);
-
         return ResponseEntity.ok(
                 ApiResult.from(
-                        executor.execute(GetPopularCollectionsUseCase.class, request),
+                        executor.execute(GetPopularCollectionsUseCase.class, GetPopularCollectionsRequest.of(language)),
                         HttpStatus.OK.value()
                 )
         );

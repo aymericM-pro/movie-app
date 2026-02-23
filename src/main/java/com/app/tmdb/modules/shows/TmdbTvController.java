@@ -11,8 +11,6 @@ import com.app.tmdb.modules.shows.usecases.GetTvFullUseCase;
 import com.app.tmdb.usecase.UseCaseExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,29 +21,19 @@ public class TmdbTvController implements TmdbTvApi {
 
     @Override
     public ResponseEntity<ApiResult<TvSearchResponse>> getTvCollection(
-            TvCollectionType type,
-            String language,
-            Integer page
-    ) {
-        TvCollectionRequest request = new TvCollectionRequest();
-        request.setType(type);
-        request.setLanguage(language);
-        request.setPage(page);
-
-        TvSearchResponse result = executor.execute(GetTvCollectionUseCase.class, request);
-
-        return ResponseEntity.ok(ApiResult.from(result, 200));
+            TvCollectionType type, String language, Integer page) {
+        return ResponseEntity.ok(ApiResult.from(
+                executor.execute(GetTvCollectionUseCase.class,
+                        TvCollectionRequest.of(type, language, page)),
+                200
+        ));
     }
 
     @Override
-    public ResponseEntity<ApiResult<TvFullResponse>> getTvDetails(
-            @PathVariable Long id,
-            @RequestParam(defaultValue = "fr-FR") String language
-    ) {
-        TvFullResponse response = executor.execute(
-                GetTvFullUseCase.class,
-                TvDetailsRequest.of(id, language)
-        );
-        return ResponseEntity.ok(ApiResult.from(response, 200));
+    public ResponseEntity<ApiResult<TvFullResponse>> getTvDetails(Long id, String language) {
+        return ResponseEntity.ok(ApiResult.from(
+                executor.execute(GetTvFullUseCase.class, TvDetailsRequest.of(id, language)),
+                200
+        ));
     }
 }
